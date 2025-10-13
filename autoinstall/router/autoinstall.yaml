@@ -1,0 +1,24 @@
+autoinstall:
+  version: 1
+  keyboard:
+    layout: de
+    variant: nodeadkeys
+  source:
+    search_drivers: false
+  network:
+    version: 2
+    ethernets:
+      enp0s3:
+        dhcp4: true
+  identity:
+    hostname: ubuntu-router
+    username: ubuntu
+    password: "$6$wdAcoXrU039hKYPd$508Qvbe7ObUnxoj15DRCkzC3qO7edjH0VV7BPNRDYK4QR8ofJaEEF2heacn0QgD.f8pO8SNp83XNdWG6tocBM1"
+  ssh:
+    install-server: true
+    authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIm32Ffm8982PuhQ7wSnY8t6JRRDVcj9xBB4EbVGTY7x phillip.meyer
+  timezone: Europe/Berlin
+  updates: all
+  packages:
+    - net-tools
