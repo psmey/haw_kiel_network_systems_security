@@ -1,0 +1,7 @@
+---
+- name: Set up Ubuntu server
+  hosts: ubuntu_server
+  roles:
+    - role: netplan
+      vars:
+        netplan_type: server

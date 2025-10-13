@@ -1,0 +1,7 @@
+---
+- name: Set up Ubuntu router
+  hosts: ubuntu_router
+  roles:
+    - role: netplan
+      vars:
+        netplan_type: router
