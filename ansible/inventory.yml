@@ -1,0 +1,27 @@
+---
+ubuntu:
+  hosts:
+    ubuntu_client:
+      ansible_host: 192.168.178.46
+      ansible_user: ubuntu
+      ansible_become_pass: ubuntu
+    ubuntu_router:
+      ansible_host:
+      ansible_user: ubuntu
+      ansible_become_pass: ubuntu
+    ubuntu_webserver:
+      ansible_host:
+      ansible_user: ubuntu
+      ansible_become_pass: ubuntu
+
+windows:
+  hosts:
+    client:
+      ansible_host:
+      ansible_user: vboxuser
+    router:
+      ansible_host:
+      ansible_user: vboxuser
+    webserver:
+      ansible_host:
+      ansible_user: vboxuser
