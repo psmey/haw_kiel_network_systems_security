@@ -1,0 +1,32 @@
+{
+    "ansible.python.interpreterPath": "/usr/bin/python3",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always",
+        "source.organizeImports": "always",
+        "source.organizeLinkDefinitions": "always",
+        "source.unusedImports": "always"
+    },
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80,
+        120,
+        160
+    ],
+    "files.associations": {
+        ".env*": "dotenv",
+    },
+    "files.autoSave": "onFocusChange",
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "markdown.extension.preview.autoShowPreviewToSide": true,
+    "markdown.extension.toc.levels": "2..6",
+    "cSpell.words": [
+        "noninteractive"
+    ],
+    "yaml.schemas": {
+        "https://www.schemastore.org/ubuntu-server-autoinstall.json": "**/autoinstall.yaml"
+    }
+}
