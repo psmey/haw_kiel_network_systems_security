@@ -1,0 +1,11 @@
+---
+- name: Reboot all hosts
+  hosts: ubuntu
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Reboot the host
+      ansible.builtin.reboot:
+        reboot_timeout: 300   # seconds
+        test_command: whoami

@@ -3,6 +3,6 @@
   hosts: ubuntu_client
   roles:
     # - ubuntu_desktop
-    - role: netplan
+    - role: ubuntu_configure_netplan
       vars:
         netplan_type: client

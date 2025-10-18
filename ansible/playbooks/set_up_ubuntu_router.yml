@@ -2,6 +2,8 @@
 - name: Set up Ubuntu router
   hosts: ubuntu_router
   roles:
-    - role: netplan
+    - role: ubuntu_configure_netplan
       vars:
         netplan_type: router
+    - ubuntu_enable_port_forwarding
+    - ubuntu_set_up_dhcp

@@ -1,0 +1,35 @@
+---
+- name: Install ISC DHCP server
+  become: true
+  ansible.builtin.apt:
+    name: isc-dhcp-server
+    state: present
+    update_cache: true
+
+- name: Deploy dhcpd.conf
+  become: true
+  ansible.builtin.copy:
+    src: files/dhcpd.conf
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Check DHCP configuration syntax
+  become: true
+  ansible.builtin.command: dhcpd -t -cf /etc/dhcp/dhcpd.conf
+  changed_when: false
+
+- name: Configure DHCP interfaces
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/default/isc-dhcp-server
+    regexp: ^INTERFACESv4=
+    line: INTERFACESv4="enp0s8 enp0s9"
+
+- name: Ensure DHCP server is started and enabled
+  become: true
+  ansible.builtin.systemd:
+    name: isc-dhcp-server
+    state: started
+    enabled: true

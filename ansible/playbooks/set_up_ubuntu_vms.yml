@@ -1,0 +1,9 @@
+---
+- name: Set up Ubuntu client
+  import_playbook: set_up_ubuntu_client.yml
+- name: Set up Ubuntu router
+  import_playbook: set_up_ubuntu_router.yml
+- name: Set up Ubuntu server
+  import_playbook: set_up_ubuntu_server.yml
+- name: Set up Ubuntu server
+  import_playbook: ubuntu_reboot.yml

@@ -2,15 +2,15 @@
 ubuntu:
   hosts:
     ubuntu_client:
-      ansible_host: 192.168.178.46
+      ansible_host: 192.168.178.52
       ansible_user: ubuntu
       ansible_become_pass: ubuntu
     ubuntu_router:
-      ansible_host:
+      ansible_host: 192.168.178.53
       ansible_user: ubuntu
       ansible_become_pass: ubuntu
-    ubuntu_webserver:
-      ansible_host:
+    ubuntu_server:
+      ansible_host: 192.168.178.48
       ansible_user: ubuntu
       ansible_become_pass: ubuntu
 

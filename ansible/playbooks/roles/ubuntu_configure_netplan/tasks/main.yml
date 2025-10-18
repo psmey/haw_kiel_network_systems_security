@@ -6,13 +6,11 @@
     dest: /etc/netplan/00-lab-net-{{ netplan_type }}.yaml
     owner: root
     group: root
-    mode: "0644"
+    mode: "0600"
 
-- name: Test netplan config
+- name: Generate netplan configuration
   become: true
-  ansible.builtin.command: netplan try --timeout 10
-  register: netplan_test
-  failed_when: netplan_test.rc != 0
+  ansible.builtin.command: netplan generate
   changed_when: false
 
 - name: Apply netplan
