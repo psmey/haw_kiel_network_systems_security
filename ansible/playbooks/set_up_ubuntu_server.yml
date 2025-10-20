@@ -5,3 +5,4 @@
     - role: ubuntu_configure_netplan
       vars:
         netplan_type: server
+    - ubuntu_set_up_nginx

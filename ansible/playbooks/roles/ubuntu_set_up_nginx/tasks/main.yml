@@ -1,0 +1,14 @@
+---
+- name: Install nginx
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    name: nginx
+    state: present
+
+- name: Enable and start nginx
+  become: true
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true  # automatically start now on boot
