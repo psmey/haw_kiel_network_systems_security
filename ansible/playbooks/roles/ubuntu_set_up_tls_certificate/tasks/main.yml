@@ -1,0 +1,27 @@
+---
+- name: Install certbot and nginx plugin
+  become: true
+  ansible.builtin.apt:
+    name:
+      - certbot
+      - python3-certbot-nginx
+    state: present
+    update_cache: true
+
+- name: Obtain Let's Encrypt certificate for {{ domain }}
+  become: true
+  ansible.builtin.command: >-
+    certbot
+      -d {{ domain }}
+      -m {{ email }}
+      -n
+      --agree-tos
+      --nginx
+  args:
+    creates: /etc/letsencrypt/live/{{ domain }}/fullchain.pem
+
+- name: Reload nginx after cert installation
+  become: true
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded

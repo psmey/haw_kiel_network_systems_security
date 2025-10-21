@@ -6,3 +6,7 @@
       vars:
         netplan_type: server
     - ubuntu_set_up_nginx
+    - role: ubuntu_set_up_tls_certificate
+      vars:
+        domain: some-domain.com
+        email: admin@some-domain.com
