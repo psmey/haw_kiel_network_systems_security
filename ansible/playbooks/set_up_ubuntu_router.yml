@@ -1,9 +1,19 @@
 ---
 - name: Set up Ubuntu router
   hosts: ubuntu_router
+  vars:
+    netplan_type: router
+    allowed_tcp_ports:
+      - 22
+      - 80
+      - 443
+      - 53
+    allowed_udp_ports:
+      - 53
+    domain: server.lab
   roles:
-    - role: ubuntu_configure_netplan
-      vars:
-        netplan_type: router
+    - ubuntu_configure_netplan
     - ubuntu_enable_port_forwarding
     - ubuntu_set_up_dhcp
+    - ubuntu_configure_ufw
+    - ubuntu_set_up_dns

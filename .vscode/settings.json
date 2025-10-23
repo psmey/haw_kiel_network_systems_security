@@ -14,7 +14,8 @@
         160
     ],
     "files.associations": {
-        ".env*": "dotenv",
+        "*.conf.j2": "jinja-properties",
+        "nginx.conf.j2": "jinja-nginx"
     },
     "files.autoSave": "onFocusChange",
     "files.eol": "\n",

@@ -5,3 +5,6 @@ network:
   ethernets:
     enp0s8:
       dhcp4: true
+      nameservers:
+        addresses:
+          - 10.0.1.1

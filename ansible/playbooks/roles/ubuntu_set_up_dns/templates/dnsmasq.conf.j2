@@ -1,0 +1,15 @@
+# Use router interface connected to client network
+interface=enp0s8
+listen-address=10.0.0.1
+
+# Don't use resolv.conf for nameservers,
+# use the ones defined here, if there are any
+no-resolv
+server=8.8.8.8
+
+# Local domain for lab network
+domain=lab
+expand-hosts
+
+# Static entry for webserver
+address=/{{ domain }}/10.0.1.2

@@ -8,7 +8,7 @@
     group: root
     mode: "0600"
 
-- name: Generate netplan configuration
+- name: Generate and verify netplan configuration
   become: true
   ansible.builtin.command: netplan generate
   changed_when: false
