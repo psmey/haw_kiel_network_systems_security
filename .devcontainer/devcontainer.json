@@ -17,7 +17,8 @@
                 "streetsidesoftware.code-spell-checker",
                 "redhat.ansible",
                 "redhat.vscode-yaml",
-                "HashiCorp.terraform"
+                "ahmadalli.vscode-nginx-conf",
+                "samuelcolvin.jinjahtml"
             ]
         }
     },
