@@ -1,16 +1,14 @@
 ---
 - name: Set up Ubuntu server
   hosts: ubuntu_server
+  vars:
+    netplan_type: server
+    domain: server.lab
+    allowed_tcp_ports:
+      - 22
+      - 80
+      - 443
   roles:
-    - role: ubuntu_configure_netplan
-      vars:
-        netplan_type: server
-    - role: ubuntu_set_up_nginx
-      vars:
-        domain: some-domain.com
-    - role: ubuntu_configure_ufw
-      vars:
-        ufw_allowed_ports:
-          - 22
-          - 80
-          - 443
+    - ubuntu_configure_netplan
+    - ubuntu_set_up_nginx
+    - ubuntu_configure_ufw

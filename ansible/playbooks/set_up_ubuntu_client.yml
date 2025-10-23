@@ -1,8 +1,8 @@
 ---
 - name: Set up Ubuntu client
   hosts: ubuntu_client
+  vars:
+    netplan_type: client
   roles:
     # - ubuntu_desktop
-    - role: ubuntu_configure_netplan
-      vars:
-        netplan_type: client
+    - ubuntu_configure_netplan
