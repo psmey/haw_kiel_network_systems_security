@@ -12,3 +12,32 @@
     name: nginx
     state: started
     enabled: true  # automatically start now on boot
+
+- name: Ensure directories exist
+  become: true
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - /etc/nginx/ssl
+    - /var/www/html
+
+- name: Generate self-signed certificate
+  become: true
+  ansible.builtin.command: >-
+    openssl req -x509 -newkey rsa:2048 -nodes
+      -keyout /etc/nginx/ssl/{{ domain }}.key
+      -out /etc/nginx/ssl/{{ domain }}.crt
+      -days 365
+      -subj "/CN={{ domain }}"
+  args:
+    creates: /etc/nginx/ssl/{{ domain }}.crt
+
+- name: Deploy Nginx site configuration
+  become: true
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: "0644"
+  notify: Reload nginx

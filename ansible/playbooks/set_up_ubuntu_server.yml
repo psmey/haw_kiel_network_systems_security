@@ -5,8 +5,12 @@
     - role: ubuntu_configure_netplan
       vars:
         netplan_type: server
-    - ubuntu_set_up_nginx
-    - role: ubuntu_set_up_tls_certificate
+    - role: ubuntu_set_up_nginx
       vars:
         domain: some-domain.com
-        email: admin@some-domain.com
+    - role: ubuntu_configure_ufw
+      vars:
+        ufw_allowed_ports:
+          - 22
+          - 80
+          - 443
