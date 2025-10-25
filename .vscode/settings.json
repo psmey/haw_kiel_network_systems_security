@@ -1,5 +1,5 @@
 {
-    "ansible.python.interpreterPath": "/usr/bin/python3",
+    "ansible.python.interpreterPath": "/root/.local/share/pipx/venvs/ansible/bin/python3",
     "editor.codeActionsOnSave": {
         "source.fixAll": "always",
         "source.organizeImports": "always",

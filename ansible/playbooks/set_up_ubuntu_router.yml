@@ -3,12 +3,12 @@
   hosts: ubuntu_router
   vars:
     netplan_type: router
-    allowed_tcp_ports:
+    ubuntu_configure_ufw_allowed_tcp_ports:
       - 22
       - 80
       - 443
       - 53
-    allowed_udp_ports:
+    ubuntu_configure_ufw_allowed_udp_ports:
       - 53
     domain: server.lab
   roles:

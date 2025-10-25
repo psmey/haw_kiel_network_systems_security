@@ -14,13 +14,14 @@ RUN apt-get update \
     software-properties-common \
     gnupg \
     shellcheck \
-    ansible \
-    ansible-lint \
-    yamllint \
+    pipx \
     xorriso \
-    # qemu-system \
-    # qemu-utils \
     && rm -rf /var/lib/apt/lists/*
+
+# Install ansible and its dependencies
+RUN pipx ensurepath \
+    && pipx install --include-deps ansible \
+    && pipx inject ansible ansible-lint yamllint
 
 # Install Hadolint
 # https://github.com/hadolint/hadolint

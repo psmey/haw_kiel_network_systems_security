@@ -18,7 +18,8 @@
                 "redhat.ansible",
                 "redhat.vscode-yaml",
                 "ahmadalli.vscode-nginx-conf",
-                "samuelcolvin.jinjahtml"
+                "samuelcolvin.jinjahtml",
+                "ms-vscode.PowerShell"
             ]
         }
     },
