@@ -12,6 +12,7 @@ RUN apt-get update \
     git \
     wget \
     software-properties-common \
+    apt-transport-https \
     gnupg \
     shellcheck \
     pipx \
@@ -60,3 +61,11 @@ RUN wget -q -O- https://apt.releases.hashicorp.com/gpg \
     && apt-get install terraform packer -y --no-install-recommends \
     # Clean up
     && rm -rf /var/lib/apt/lists/*
+
+# Install Powershell
+RUN source /etc/os-release \
+    && wget -q https://packages.microsoft.com/config/ubuntu/${VERSION_ID}/packages-microsoft-prod.deb \
+    && dpkg -i packages-microsoft-prod.deb \
+    && rm packages-microsoft-prod.deb \
+    && apt-get update \
+    &&  apt-get install -y powershell
