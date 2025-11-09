@@ -4,7 +4,7 @@
   vars:
     netplan_type: server
     domain: server.lab
-    allowed_tcp_ports:
+    ubuntu_configure_ufw_allowed_tcp_ports:
       - 22
       - 80
       - 443

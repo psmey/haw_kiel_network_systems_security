@@ -1,0 +1,23 @@
+---
+- name: Install StrongSwan
+  become: true
+  ansible.builtin.apt:
+    name: strongswan
+    state: present
+    update_cache: true
+
+- name: Deploy strongswan.conf
+  become: true
+  ansible.builtin.copy:
+    src: "{{ ipsec_role }}-strongswan.conf"
+    dest: /etc/strongswan.conf
+    owner: root
+    group: root
+    mode: "0600"
+
+- name: Enable and start StrongSwan
+  become: true
+  ansible.builtin.systemd:
+    name: strongswan-starter
+    enabled: true
+    state: started

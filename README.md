@@ -2,6 +2,9 @@
 
 - [Ubuntu](#ubuntu)
   - [Set up](#set-up)
+  - [Task 3](#task-3)
+    - [Wireguard](#wireguard)
+    - [IPSec / StrongSwan](#ipsec--strongswan)
 - [Windows](#windows)
   - [Set up](#set-up-1)
   - [General Tips](#general-tips)
@@ -14,6 +17,72 @@ If needed install the virtualbox guest additions to use shared folders and the c
 
 ```bash
 sudo apt-get install virtualbox-guest-additions-iso
+```
+
+### Task 3
+
+#### Wireguard
+
+Verify wireguard is running
+
+```bash
+systemctl status wireguard
+```
+
+Stop wireguard
+
+```bash
+sudo wg-quick down wg0
+```
+
+Start wireguard
+
+```bash
+sudo wg-quick up wg0
+```
+
+Ensure wireguard is configured
+
+```bash
+ip a
+```
+
+Test connection with wireguard
+
+```bash
+ping 10.0.1.2 -I wg0
+```
+
+#### IPSec / StrongSwan
+
+Verify StrongSwan is running
+
+```bash
+systemctl status strongswan-starter
+```
+
+Start StrongSwan
+
+```bash
+sudo systemctl stop strongswan-starter
+```
+
+Check functionality when StrongSwan is running
+
+```bash
+ping 10.0.1.2
+```
+
+Check functionality when StrongSwan is running
+
+```bash
+ping 10.0.1.2
+```
+
+Check connections for ipsec
+
+```bash
+sudo ipsec statusall
 ```
 
 ## Windows
@@ -47,7 +116,7 @@ sudo apt-get install virtualbox-guest-additions-iso
 
 ### General Tips
 
-Force shut down windows to prevent updating with:
+Force shut down windows:
 
 ```ps1
 shutdown.exe /f /s /t 0

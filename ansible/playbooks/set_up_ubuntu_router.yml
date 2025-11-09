@@ -3,6 +3,8 @@
   hosts: ubuntu_router
   vars:
     netplan_type: router
+    wireguard_role: router
+    ipsec_role: router
     ubuntu_configure_ufw_allowed_tcp_ports:
       - 22
       - 80
@@ -10,6 +12,11 @@
       - 53
     ubuntu_configure_ufw_allowed_udp_ports:
       - 53
+      # Wireguard
+      - 51820
+      # IPSec / StrongSwan
+      - 500
+      - 4500
     domain: server.lab
   roles:
     - ubuntu_configure_netplan
@@ -17,3 +24,5 @@
     - ubuntu_set_up_dhcp
     - ubuntu_configure_ufw
     - ubuntu_set_up_dns
+    - set_up_wireguard
+    - set_up_ipsec
