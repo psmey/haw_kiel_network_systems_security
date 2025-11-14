@@ -1,0 +1,12 @@
+---
+- name: Set up Ubuntu client
+  hosts: ubuntu_client
+  vars:
+    netplan_type: client
+    wireguard_role: client
+    ipsec_role: client
+  roles:
+    # - ubuntu_desktop
+    - ubuntu_configure_netplan
+    - set_up_wireguard
+    - set_up_ipsec

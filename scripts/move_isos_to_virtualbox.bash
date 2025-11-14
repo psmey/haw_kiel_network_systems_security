@@ -4,5 +4,6 @@
 # vbox ISO folder
 # Note: This also only works inside the WSL not the devcontainer!
 
-cp -v ./output/* /mnt/c/Users/psmey/VirtualBox\ VMs/ISOs
+cp -v ./output/* /mnt/c/Users/psmey/VirtualBox\ VMs/ISOs/
+
 echo "✅ Done!"
