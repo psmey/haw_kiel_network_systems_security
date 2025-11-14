@@ -1,6 +1,6 @@
 ---
 - name: Set up Ubuntu client
-  hosts: ubuntu_client
+  hosts: ubuntu_client_2
   vars:
     netplan_type: client
     wireguard_role: client

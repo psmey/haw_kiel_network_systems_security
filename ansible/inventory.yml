@@ -5,6 +5,10 @@ ubuntu:
       ansible_host: 192.168.178.52
       ansible_user: ubuntu
       ansible_become_pass: ubuntu
+    ubuntu_client_2:
+      ansible_host: 192.168.178.52
+      ansible_user: ubuntu
+      ansible_become_pass: ubuntu
     ubuntu_router:
       ansible_host: 192.168.178.53
       ansible_user: ubuntu
