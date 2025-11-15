@@ -19,7 +19,8 @@
                 "redhat.vscode-yaml",
                 "ahmadalli.vscode-nginx-conf",
                 "samuelcolvin.jinjahtml",
-                "ms-vscode.PowerShell"
+                "ms-vscode.PowerShell",
+                "idleberg.openvpn"
             ]
         }
     },
