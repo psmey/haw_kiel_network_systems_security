@@ -1,0 +1,84 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            ea:81:e4:64:fa:8c:5f:9b:6b:79:0e:25:59:90:bd:79
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=router.lab
+        Validity
+            Not Before: Nov 14 17:50:24 2025 GMT
+            Not After : Feb 17 17:50:24 2028 GMT
+        Subject: CN=server
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:a2:4b:f8:dc:54:e0:c3:99:b6:a9:4e:64:53:d0:
+                    e5:4c:42:41:4d:05:92:b9:22:81:52:5d:f4:af:83:
+                    b0:0f:f6:c0:59:b8:df:59:09:36:24:94:02:fb:f4:
+                    b3:f5:d8:17:20:67:8b:0d:97:14:1e:d5:e6:94:6f:
+                    b0:07:17:6e:b4:73:13:de:af:5c:d2:c7:24:e6:72:
+                    81:57:86:f9:ec:ba:85:65:1d:e3:04:56:71:85:d6:
+                    a8:b4:c8:ed:d4:f7:00:3e:09:88:09:36:db:86:ae:
+                    30:82:35:8b:8d:00:ba:9d:74:33:8d:4e:66:de:ac:
+                    0c:7b:ec:56:cb:25:09:75:34:e0:ec:cf:09:74:a8:
+                    6c:77:63:41:01:78:3d:7d:cf:ac:55:3a:44:dc:0d:
+                    5a:32:ac:14:cc:86:ad:1a:ff:f3:e1:51:0f:01:7f:
+                    cd:0a:8b:44:3a:43:17:88:33:d0:4d:f7:c4:84:87:
+                    72:e5:59:f9:5e:ca:71:40:cc:ad:3d:b9:6d:82:43:
+                    e9:ba:e2:1b:a0:71:05:43:03:95:da:24:c6:f0:c2:
+                    5b:b1:4a:c5:87:e0:c0:11:89:55:b9:30:34:0b:f6:
+                    25:1a:23:62:45:6e:d7:9a:87:b0:97:47:6b:32:4b:
+                    d6:4a:38:c1:da:87:fe:b1:fd:d2:4f:c5:6c:af:71:
+                    73:8d
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                61:A0:51:22:EE:3D:1E:45:1F:2B:53:78:E7:A5:8D:77:50:C6:DA:95
+            X509v3 Authority Key Identifier: 
+                keyid:A4:04:44:B7:36:C7:7A:1C:62:CD:D1:3E:84:00:52:0E:03:FC:17:91
+                DirName:/CN=router.lab
+                serial:56:32:B2:9A:2C:4D:96:2C:0A:39:A1:86:AF:C3:6B:46:CE:78:B3:45
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        a0:25:c8:b4:53:b6:7e:0f:ef:7b:c3:d7:97:1c:6e:4c:fc:af:
+        9b:2b:cb:09:19:95:7e:62:de:11:94:cd:ba:bd:fe:98:96:41:
+        d5:bc:1c:ca:34:47:ec:5e:57:6c:f5:85:60:ef:93:da:8e:52:
+        04:a4:c9:e9:9f:5f:3f:0c:d6:84:65:df:62:f0:b7:7c:bf:1d:
+        73:86:30:c9:c9:2d:01:c6:b5:85:2b:2d:02:84:6c:16:8d:6c:
+        9d:8a:96:c4:59:21:a4:aa:ec:36:d3:af:55:b8:e5:b0:d0:40:
+        28:bf:2e:ef:68:d7:ca:c3:75:86:eb:0a:65:85:44:fa:5d:b7:
+        19:13:9f:b9:09:57:9f:c6:b0:8f:8b:e4:86:5f:39:ce:51:9c:
+        f5:5f:ee:cd:4e:0a:82:74:9d:cb:f0:95:80:c5:1b:78:51:c9:
+        ba:dc:d4:7b:7b:d5:c9:c1:b0:1f:80:1c:be:e5:7c:d6:09:22:
+        09:0b:89:b5:5e:69:d9:95:e3:1d:85:31:46:d2:a0:2b:2e:fd:
+        f9:c4:60:1c:95:cf:f0:56:ab:37:45:04:88:b3:19:a7:fb:0a:
+        89:0a:1c:f2:52:f2:68:59:d2:96:fe:12:d0:95:ec:d5:31:bd:
+        5a:dc:53:02:a8:5c:a5:92:29:6d:2b:bc:22:c9:2c:9b:e2:08:
+        90:33:91:41
+-----BEGIN CERTIFICATE-----
+MIIDUzCCAjugAwIBAgIRAOqB5GT6jF+ba3kOJVmQvXkwDQYJKoZIhvcNAQELBQAw
+FTETMBEGA1UEAwwKcm91dGVyLmxhYjAeFw0yNTExMTQxNzUwMjRaFw0yODAyMTcx
+NzUwMjRaMBExDzANBgNVBAMMBnNlcnZlcjCCASIwDQYJKoZIhvcNAQEBBQADggEP
+ADCCAQoCggEBAKJL+NxU4MOZtqlOZFPQ5UxCQU0FkrkigVJd9K+DsA/2wFm431kJ
+NiSUAvv0s/XYFyBniw2XFB7V5pRvsAcXbrRzE96vXNLHJOZygVeG+ey6hWUd4wRW
+cYXWqLTI7dT3AD4JiAk224auMII1i40Aup10M41OZt6sDHvsVsslCXU04OzPCXSo
+bHdjQQF4PX3PrFU6RNwNWjKsFMyGrRr/8+FRDwF/zQqLRDpDF4gz0E33xISHcuVZ
++V7KcUDMrT25bYJD6briG6BxBUMDldokxvDCW7FKxYfgwBGJVbkwNAv2JRojYkVu
+15qHsJdHazJL1ko4wdqH/rH90k/FbK9xc40CAwEAAaOBoTCBnjAJBgNVHRMEAjAA
+MB0GA1UdDgQWBBRhoFEi7j0eRR8rU3jnpY13UMbalTBQBgNVHSMESTBHgBSkBES3
+Nsd6HGLN0T6EAFIOA/wXkaEZpBcwFTETMBEGA1UEAwwKcm91dGVyLmxhYoIUVjKy
+mixNliwKOaGGr8NrRs54s0UwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQD
+AgWgMA0GCSqGSIb3DQEBCwUAA4IBAQCgJci0U7Z+D+97w9eXHG5M/K+bK8sJGZV+
+Yt4RlM26vf6YlkHVvBzKNEfsXlds9YVg75PajlIEpMnpn18/DNaEZd9i8Ld8vx1z
+hjDJyS0BxrWFKy0ChGwWjWydipbEWSGkquw2069VuOWw0EAovy7vaNfKw3WG6wpl
+hUT6XbcZE5+5CVefxrCPi+SGXznOUZz1X+7NTgqCdJ3L8JWAxRt4Ucm63NR7e9XJ
+wbAfgBy+5XzWCSIJC4m1XmnZleMdhTFG0qArLv35xGAclc/wVqs3RQSIsxmn+wqJ
+ChzyUvJoWdKW/hLQlezVMb1a3FMCqFylkiltK7wiySyb4giQM5FB
+-----END CERTIFICATE-----

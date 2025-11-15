@@ -85,10 +85,10 @@ function Enable-Firewall {
     Write-Host "Enable firewall" -ForegroundColor Cyan
     Set-NetFirewallProfile -Profile Domain, Private, Public -Enabled True
 
-    Write-Host "Set up firewall rules" -ForegroundColor Cyan
-    Write-Host "Default inbound: block" -ForegroundColor Cyan
-    Write-Host "Default outbound: allow" -ForegroundColor Cyan
-    Set-NetFirewallProfile -Profile Domain, Private, Public -DefaultInboundAction Block -DefaultOutboundAction Allow
+    # Write-Host "Set up firewall rules" -ForegroundColor Cyan
+    # Write-Host "Default inbound: block" -ForegroundColor Cyan
+    # Write-Host "Default outbound: allow" -ForegroundColor Cyan
+    # Set-NetFirewallProfile -Profile Domain, Private, Public -DefaultInboundAction Block -DefaultOutboundAction Allow
 
     Get-NetFirewallProfile `
     | Select-Object Name, Enabled, DefaultInboundAction, DefaultOutboundAction `
@@ -121,7 +121,7 @@ function Enable-NginxServer {
     choco install nginx -y
 
     Copy-Item `
-        -Path "\\vboxsrv\shared\windows_lab\nginx.conf" `
+        -Path "\\vboxsrv\shared\nginx.conf" `
         -Destination "$nginxConf" `
         -Force
 
@@ -181,12 +181,106 @@ function Enable-DNS {
     Get-DnsServerZone | Where-Object { $_.ZoneName -eq $dnsZone }
 
     Write-Host "Add DNS records" -ForegroundColor Cyan
-    Add-DnsServerResourceRecordA -Name "server" -ZoneName $dnsZone -IPv4Address "192.168.2.2"
+    Add-DnsServerResourceRecordA -Name "server" -ZoneName $dnsZone -IPv4Address "10.0.2.2"
 
     Write-Host "Verify DNS records" -ForegroundColor Cyan
     Get-DnsServerResourceRecord -ZoneName $dnsZone
 
     Write-Host "=== Successfully set up DNS ===" -ForegroundColor Green
+}
+
+function Enable-VPN {
+    Write-Host "Install Windows feature for VPN" -ForegroundColor Cyan
+    Install-WindowsFeature DirectAccess-VPN -IncludeManagementTools
+
+    Write-Host "Configuring RRAS for VPN access" -ForegroundColor Cyan
+    Install-RemoteAccess -VpnType Vpn
+}
+
+function Add-SSTP {
+    $PfxPath = "\\vboxsrv\shared\sstp\cert.pfx"
+    $CertPass = (ConvertTo-SecureString "Password123" -AsPlainText -Force)
+
+    Write-Host "Import certificate" -ForegroundColor Cyan
+    # Cert:\<Scope>\<StoreName>
+    $cert = Import-PfxCertificate -FilePath $PfxPath -CertStoreLocation "Cert:\LocalMachine\My" -Password $CertPass
+
+    Write-Host "Confirm import" -ForegroundColor Cyan
+    $cert | Format-List Subject, Thumbprint, NotAfter
+
+    Set-RemoteAccess -SslCertificate $cert
+
+    # If this needs to be changed
+    # Add-VpnIPAddressRange -IPAddressRange 10.0.1.2, 10.0.1.254
+    # Remove-VpnIPAddressRange -IPAddress 123.0.1.2
+    Set-VpnIPAddressAssignment -IPAssignmentMethod "StaticPool" -IPAddressRange 10.0.1.2, 10.0.1.254
+
+    Set-VpnAuthProtocol -UserAuthProtocolAccepted MsChapv2
+
+    Get-RemoteAccess
+
+    $Username = "vpnuser"
+    $Password = "Password123"
+    $SecurePassword = ConvertTo-SecureString $Password -AsPlainText -Force
+
+    # Create the local user
+    New-LocalUser -Name $Username -Password $SecurePassword -FullName "VPN User" -Description "User for SSTP VPN access"
+
+    # Add user to 'Users' group (default)
+    Add-LocalGroupMember -Group "Users" -Member $Username
+
+    netsh ras set user name="$Username" dialin=PERMIT
+    netsh ras show user
+}
+
+function Add-SSTPConnection {
+    param (
+        [string]$IP
+    )
+
+    $certPath = "\\vboxsrv\shared\sstp\cert.cer"
+
+    Remove-VpnConnection -Name "SSTP" -Force
+    Add-VpnConnection `
+        -Name "SSTP" `
+        -ServerAddress "$IP" `
+        -TunnelType Sstp `
+        -AuthenticationMethod MSChapv2 `
+        -RememberCredential `
+        -Force
+
+    Import-Certificate -FilePath $certPath -CertStoreLocation Cert:\LocalMachine\Root
+}
+
+function Add-OpenVPN {
+    param (
+        [string]$vmName
+    )
+
+    $configPath = "C:\Program Files\OpenVPN\config-auto"
+
+    choco install --force -y openvpn --package-parameters="/WintunDriver /Documentation /SampleConfig /EasyRsa /Service"
+
+    Remove-Item "$configPath\*" -Recurse -Force -ErrorAction SilentlyContinue
+
+    Copy-Item -Path "\\vboxsrv\shared\open_vpn\$vmName\*" -Destination $configPath -Recurse -Force
+
+    Set-Service -Name OpenVPNService -StartupType Automatic
+
+    Start-Service OpenVPNService
+
+    Get-Service OpenVPNService
+}
+
+function Invoke-RemoteAccessServiceRestart {
+    Write-Host "Restart Remote Access Service" -ForegroundColor Cyan
+    Stop-Service RemoteAccess -Force
+
+    Start-Service RemoteAccess
+
+    Set-Service RemoteAccess -StartupType Automatic
+
+    Get-Service RemoteAccess | Format-Table Status, StartType
 }
 
 function Invoke-Reboot {

@@ -2,9 +2,11 @@
 
 . "$PSScriptRoot\functions.ps1"
 
+Enable-NetAdapter -Name "Ethernet" -Confirm:$false
+
 Update-PowershellVersion
 
-Set-EthernetInterfaceConfiguration -Interface "Ethernet 2" -IP "192.168.2.2" -Gateway "192.168.2.1"
+Set-EthernetInterfaceConfiguration -Interface "Ethernet 2" -IP "10.0.2.2" -Gateway "10.0.2.1"
 
 Enable-Firewall
 
@@ -15,5 +17,7 @@ Write-Host "- Port 443 (HTTPS)" -ForegroundColor Cyan
 New-NetFirewallRule -DisplayName "Allow HTTPS" -Direction Inbound -Protocol TCP -LocalPort 443 -Action Allow
 
 Enable-NginxServer
+
+Disable-NetAdapter -Name "Ethernet" -Confirm:$false
 
 # Invoke-Reboot
