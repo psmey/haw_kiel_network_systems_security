@@ -3,8 +3,8 @@
   hosts: ubuntu_client_2
   vars:
     netplan_type: client
-    wireguard_role: client
-    ipsec_role: client
+    wireguard_role: client2
+    ipsec_role: client-2
   roles:
     # - ubuntu_desktop
     - ubuntu_configure_netplan
