@@ -2,26 +2,105 @@
 
 - [Ubuntu](#ubuntu)
   - [Set up](#set-up)
+  - [Task 1 \& 2](#task-1--2)
+    - [Connectivity](#connectivity)
+    - [Firewall](#firewall)
+    - [DNS](#dns)
+    - [Webserver](#webserver)
   - [Task 3](#task-3)
     - [Wireguard](#wireguard)
     - [IPSec / StrongSwan](#ipsec--strongswan)
 - [Windows](#windows)
   - [Set up](#set-up-1)
   - [General Tips](#general-tips)
+    - [Force shut down windows](#force-shut-down-windows)
+    - [Set keyboard layout](#set-keyboard-layout)
+    - [Manage Ethernet Ports](#manage-ethernet-ports)
+    - [Service Debugging](#service-debugging)
+  - [Task 3](#task-3-1)
+    - [SSTP](#sstp)
 
 ## Ubuntu
 
 ### Set up
 
-If needed install the virtualbox guest additions to use shared folders and the clip board.
+(optional) Install the virtualbox guest additions to use shared folders and the clip board.
 
 ```bash
 sudo apt-get install virtualbox-guest-additions-iso
 ```
 
+### Task 1 & 2
+
+#### Connectivity
+
+Verify
+
+```bash
+ping <target_ip> -I <interface_name>
+```
+
+```bash
+ifconfig
+```
+
+> Or just `ip a` which works out of the box on ubuntu.
+
+Manage network interfaces:
+
+```bash
+sudo ip link set <network_interface> down
+```
+
+```bash
+sudo ip link set <network_interface> up
+```
+
+#### Firewall
+
+```bash
+sudo ufw status
+```
+
+#### DNS
+
+```bash
+nslookup server.lab
+```
+
+```bash
+ping server.lab
+```
+
+#### Webserver
+
+Verify nginx is running:
+
+```bash
+sudo systemctl status nginx
+```
+
+```bash
+curl https://server.lab -k -L
+```
+
+```bash
+sudo systemctl status nginx
+```
+
+> `-k` `--insecure`
+> `-L` `--location`
+> `-v` `--verbose`
+
 ### Task 3
 
 #### Wireguard
+
+Generate Keypair for wireguard
+
+```bash
+wg genkey | tee privatekey | wg pubkey > publickey
+```
 
 Verify wireguard is running
 
@@ -116,14 +195,58 @@ sudo ipsec statusall
 
 ### General Tips
 
-Force shut down windows:
+#### Force shut down windows
 
 ```ps1
 shutdown.exe /f /s /t 0
 ```
 
-Set keyboard layout:
+#### Set keyboard layout
 
 ```ps1
 Set-WinUserLanguageList -LanguageList "de-DE"
+```
+
+#### Manage Ethernet Ports
+
+```ps1
+Get-NetAdapter
+```
+
+```ps1
+Disable-NetAdapter -Name "Ethernet" -Confirm:$false
+```
+
+```ps1
+Enable-NetAdapter -Name "Ethernet" -Confirm:$false
+```
+
+#### Service Debugging
+
+Check service status
+
+```ps1
+Get-Service <Service>
+```
+
+Look at logs
+
+```
+Get-Content <FilePath> -Wait
+```
+
+### Task 3
+
+Verify VPN-Connection on client
+
+```ps1
+Get-VpnConnection
+```
+
+#### SSTP
+
+Connect to router
+
+```ps1
+rasdial "SSTP" vpnuser Password123
 ```
