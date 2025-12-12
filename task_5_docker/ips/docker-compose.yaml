@@ -1,0 +1,90 @@
+services:
+  app:
+    image: nginx:1.29.4-alpine
+    restart: always
+    networks:
+      crowdsec:
+
+  reverse-proxy:
+    image: owasp/modsecurity-crs:4.21.0-nginx-alpine-202512071012
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      BACKEND: http://app:80
+      PORT: 8080
+      LOGLEVEL: info
+    depends_on:
+      - 'app'
+    networks:
+      crowdsec:
+
+  crowdsec:
+    image: crowdsecurity/crowdsec
+    restart: always
+    networks:
+      crowdsec:
+    ports:
+      - "127.0.0.1:8081:8080"
+    environment:
+      COLLECTIONS: "crowdsecurity/nginx"
+    depends_on:
+      - 'reverse-proxy'
+    volumes:
+      ## Bad pratice to mount docker socket into a container
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      ######################################################
+      - ./crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - crowdsec-db:/var/lib/crowdsec/data/
+      - crowdsec-config:/etc/crowdsec/
+
+# #Uncomment to use socket proxy
+  # socket-proxy:
+  #   networks:
+  #     crowdsec:
+  #   restart: always
+  #   image: lscr.io/linuxserver/socket-proxy:latest
+  #   container_name: socket-proxy
+  #   environment:
+  #     - ALLOW_START=0 #optional
+  #     - ALLOW_STOP=0 #optional
+  #     - ALLOW_RESTARTS=0 #optional
+  #     - AUTH=0 #optional
+  #     - BUILD=0 #optional
+  #     - COMMIT=0 #optional
+  #     - CONFIGS=0 #optional
+  #     - CONTAINERS=1 #optional
+  #     - DISABLE_IPV6=0 #optional
+  #     - DISTRIBUTION=0 #optional
+  #     - EVENTS=1 #optional
+  #     - EXEC=0 #optional
+  #     - IMAGES=0 #optional
+  #     - INFO=1 #optional
+  #     - LOG_LEVEL=info #optional
+  #     - NETWORKS=0 #optional
+  #     - NODES=0 #optional
+  #     - PING=1 #optional
+  #     - PLUGINS=0 #optional
+  #     - POST=0 #optional
+  #     - SECRETS=0 #optional
+  #     - SERVICES=0 #optional
+  #     - SESSION=0 #optional
+  #     - SWARM=0 #optional
+  #     - SYSTEM=0 #optional
+  #     - TASKS=0 #optional
+  #     - VERSION=1 #optional
+  #     - VOLUMES=0 #optional
+  #   volumes:
+  #     - '/var/run/docker.sock:/var/run/docker.sock:ro'
+  #   read_only: true
+  #   tmpfs:
+  #     - /run
+# #
+
+volumes:
+  crowdsec-db:
+  crowdsec-config:
+
+networks:
+  crowdsec:
+    driver: bridge
