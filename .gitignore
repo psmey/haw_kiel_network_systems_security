@@ -4,3 +4,7 @@ output/
 
 # Ansible
 .ansible/
+
+# Hydra
+hydra.restore
+rockyou.txt
