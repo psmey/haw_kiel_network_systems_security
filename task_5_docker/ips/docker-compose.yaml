@@ -35,51 +35,22 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       ######################################################
       - ./crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - ./crowdsec/whitelists.yaml:/etc/crowdsec/parsers/s02-enrich/whitelists.yaml
       - crowdsec-db:/var/lib/crowdsec/data/
       - crowdsec-config:/etc/crowdsec/
 
-# #Uncomment to use socket proxy
-  # socket-proxy:
-  #   networks:
-  #     crowdsec:
-  #   restart: always
-  #   image: lscr.io/linuxserver/socket-proxy:latest
-  #   container_name: socket-proxy
-  #   environment:
-  #     - ALLOW_START=0 #optional
-  #     - ALLOW_STOP=0 #optional
-  #     - ALLOW_RESTARTS=0 #optional
-  #     - AUTH=0 #optional
-  #     - BUILD=0 #optional
-  #     - COMMIT=0 #optional
-  #     - CONFIGS=0 #optional
-  #     - CONTAINERS=1 #optional
-  #     - DISABLE_IPV6=0 #optional
-  #     - DISTRIBUTION=0 #optional
-  #     - EVENTS=1 #optional
-  #     - EXEC=0 #optional
-  #     - IMAGES=0 #optional
-  #     - INFO=1 #optional
-  #     - LOG_LEVEL=info #optional
-  #     - NETWORKS=0 #optional
-  #     - NODES=0 #optional
-  #     - PING=1 #optional
-  #     - PLUGINS=0 #optional
-  #     - POST=0 #optional
-  #     - SECRETS=0 #optional
-  #     - SERVICES=0 #optional
-  #     - SESSION=0 #optional
-  #     - SWARM=0 #optional
-  #     - SYSTEM=0 #optional
-  #     - TASKS=0 #optional
-  #     - VERSION=1 #optional
-  #     - VOLUMES=0 #optional
-  #   volumes:
-  #     - '/var/run/docker.sock:/var/run/docker.sock:ro'
-  #   read_only: true
-  #   tmpfs:
-  #     - /run
-# #
+  firewall-bouncer:
+    image: ghcr.io/shgew/cs-firewall-bouncer-docker:latest
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./crowdsec/crowdsec-firewall-bouncer.yaml:/config/crowdsec-firewall-bouncer.yaml:ro
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
 
 volumes:
   crowdsec-db:

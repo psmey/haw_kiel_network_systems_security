@@ -16,10 +16,14 @@ Test connection <https://doc.crowdsec.net/u/getting_started/health_check/>
 
 Create coonection event:
 
-> local IP addresses are whitelisted!
+```bash
+curl -I http://localhost:8080/crowdsec-test-NtktlJHV4TfBSK3wvlhiOBnl
+```
+
+Check for alert event
 
 ```bash
-curl http://localhost:8000/crowdsec-test-NtktlJHV4TfBSK3wvlhiOBnl -v
+docker exec ips-crowdsec-1 cscli alerts list -s crowdsecurity/http-generic-test
 ```
 
 Show monitoring

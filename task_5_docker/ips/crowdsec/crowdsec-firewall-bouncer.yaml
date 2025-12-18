@@ -1,0 +1,4 @@
+# https://github.com/shgew/cs-firewall-bouncer-docker
+mode: iptables
+api_url: http://localhost:8081
+api_key: JZT+iDLFGoSQ4i82eJCCaitYGG2A5NHGZ2rQwT7aieA
