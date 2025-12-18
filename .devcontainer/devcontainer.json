@@ -20,7 +20,8 @@
                 "ahmadalli.vscode-nginx-conf",
                 "samuelcolvin.jinjahtml",
                 "ms-vscode.PowerShell",
-                "idleberg.openvpn"
+                "idleberg.openvpn",
+                "streetsidesoftware.code-spell-checker-german"
             ]
         }
     },
